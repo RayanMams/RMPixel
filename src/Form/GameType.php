@@ -24,6 +24,7 @@ class GameType extends AbstractType
             ->add('releaseDate', options: [
                 'years' => range(1972, date('Y') + 2), // de 1972 à la date courante + 2 ans
             ])
+            ->add('category', EntityType::class)
         ;
     }
 
@@ -33,5 +34,10 @@ class GameType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Game::class,
         ]);
+    }
+
+    public function __toString(): string
+    {
+	    return $this->name;
     }
 }

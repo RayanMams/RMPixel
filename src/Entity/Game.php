@@ -23,6 +23,12 @@ class Game
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private \DateTime|null $releaseDate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'games')]
+    private ?Name $category = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $Support = null;
+
     public function getId(): int|null
     {
         return $this->id;
@@ -60,6 +66,30 @@ class Game
     public function setReleaseDate(\DateTime|null $releaseDate): self
     {
         $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Name
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Name $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSupport(): ?string
+    {
+        return $this->Support;
+    }
+
+    public function setSupport(string $Support): static
+    {
+        $this->Support = $Support;
 
         return $this;
     }
